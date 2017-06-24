@@ -1,6 +1,6 @@
 # DetNetSpawc
 #This repositiry hold the files used in the paper "Deep MIMO Detection" presented in spawc2017
-# Further information regarding the algorithm can be founf at
+#Further information regarding the algorithm can be founf at
 https://arxiv.org/abs/1706.01151
 
 All files require the TensorFlow library in order to run.
