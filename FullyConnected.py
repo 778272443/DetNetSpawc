@@ -63,8 +63,8 @@ H - the channel to detect over
 K = 20
 N = 30
 B = 1000
-train_iter = 1000
-test_iter = 100
+train_iter = 1000000
+test_iter = 1000
 low_snr_db_train = 7.0
 high_snr_db_train = 14.0
 low_snr_db_test = 8.0
@@ -135,18 +135,10 @@ training phase og the network
 """
 for i in range(train_iter):
     batch_Y, batch_H, batch_HY, batch_HH, batch_X , SNR1= generate_data(B , K , N , low_snr_train , high_snr_train , H)
-    if i % 100 == 0:
-            
-        correct_bits = eq2.eval(feed_dict={
-            NNinput: batch_Y, org_siganl: batch_X, batchSize: B}
-        )
-
-        train_accuracy = accuracy.eval(feed_dict={
-            NNinput: batch_Y, org_siganl: batch_X, batchSize: B}
-        )
+    if i % 100 == 0: 
+        correct_bits = eq2.eval(feed_dict={NNinput: batch_Y, org_siganl: batch_X, batchSize: B})
+        train_accuracy = accuracy.eval(feed_dict={NNinput: batch_Y, org_siganl: batch_X, batchSize: B})
         print("step %d, loss is %g, number of correct bits %d" % (i, train_accuracy,correct_bits))
-
-
     train_step.run(feed_dict={NNinput: batch_Y, org_siganl: batch_X, batchSize: B})
 
 """
@@ -165,26 +157,14 @@ for i_snr in range (num_snr):
 
 	batch_Y, batch_H, batch_HY, batch_HH, batch_X , SNR1= generate_data(B , K , N , Cur_SNR , Cur_SNR , H)
 	tic = tm.time()
-        tmp_bers[0][i] =   eq2.eval(feed_dict={
-                NNinput: batch_Y, org_siganl: batch_X, batchSize: B}	
-	)
+        tmp_bers[0][i] =   eq2.eval(feed_dict={NNinput: batch_Y, org_siganl: batch_X, batchSize: B}	)
 	toc = tm.time()
 	tmp_times[0][i] = toc - tic
-
-      	if i % 100 == 0:
-               
-           	eq2.eval(feed_dict={
-               	NNinput: batch_Y, org_siganl: batch_X, batchSize: B}
-            	)
-            	train_accuracy = accuracy.eval(feed_dict={
-               	NNinput: batch_Y, org_siganl: batch_X, batchSize: B}
-            	)
-            	print("test accuracy %g" % eq2.eval(feed_dict={
-            	 	  NNinput: batch_Y, org_siganl: batch_X, batchSize: B}
-		))
-
+      	if i % 100 == 0:  
+           	eq2.eval(feed_dict={NNinput: batch_Y, org_siganl: batch_X, batchSize: B})
+            	train_accuracy = accuracy.eval(feed_dict={NNinput: batch_Y, org_siganl: batch_X, batchSize: B})
+            	print("test accuracy %g" % eq2.eval(feed_dict={NNinput: batch_Y, org_siganl: batch_X, batchSize: B}))
     bers[0][i_snr] = np.mean(tmp_bers[0])
-
     
 times[0][0] = np.mean(tmp_times[0])/B
 print ('Average time to detect a single K bit signal is:')
