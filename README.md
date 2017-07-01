@@ -4,7 +4,8 @@
 https://arxiv.org/abs/1706.01151
 
 All files require the TensorFlow library in order to run.
-All files were tested using Tensorflow version 1.0.1. Using different versions may require certain syntax modifications.
+All files were tested using Tensorflow version 1.0.1. Using different versions may require certain modifications.
+Parameters are not the same used in the paper, so results might be slightly different.
 
 #file list:
 DetNet.py-The basic DetNet architecture. Training and testing over i.i.d gaussian channels
