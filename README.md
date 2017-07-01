@@ -8,3 +8,5 @@ All files were tested using Tensorflow version 1.0.1. Using different versions m
 
 #file list:
 DetNet.py-The basic DetNet architecture. Training and testing over i.i.d gaussian channels
+FullyConnected.py - The Fully connected architecture. Training and testing over a fixed channel
+Top06_30_20.csv -  An example of a channel that can be used in the FullyConnected.py 
